@@ -28,3 +28,10 @@ You can ask questions about the examples on the [UVM Primer Google group](https:
 Enjoy the examples!
 
 Ray Salemi
+
+
+
+```
+cd 'yourdictory' // this dic have 'run.do'
+do run.do // run the example which u want
+```
