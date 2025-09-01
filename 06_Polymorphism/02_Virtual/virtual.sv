@@ -34,7 +34,7 @@ class lion extends animal;
    endfunction : new
 
    function void make_sound();
-      $display ("The Lion says Roar");
+      $display ("The Lion says aWoW");
    endfunction : make_sound
 
 endclass : lion
@@ -47,7 +47,7 @@ class chicken extends animal;
    endfunction : new
 
    function void make_sound();
-      $display ("The Chicken says BECAWW");
+      $display ("The Chicken says iKUN");
    endfunction : make_sound
 
 endclass : chicken
@@ -64,19 +64,19 @@ module top;
       
       lion_h  = new(15);
       lion_h.make_sound();
-      $display("The Lion is %0d years old", lion_h.age);
+      $display("The Lion is %0d years old\n", lion_h.age);
       
       chicken_h = new(1);
       chicken_h.make_sound();
-      $display("The Chicken is %0d years old", chicken_h.age);
+      $display("The Chicken is %0d years old\n", chicken_h.age);
 
       animal_h = lion_h;
       animal_h.make_sound();
-      $display("The animal is %0d years old", animal_h.age);
+      $display("The animal is %0d years old\n", animal_h.age);
       
       animal_h = chicken_h;
       animal_h.make_sound();
-      $display("The animal is %0d years old", animal_h.age);
+      $display("The animal is %0d years old\n", animal_h.age);
       
    end // initial begin
 

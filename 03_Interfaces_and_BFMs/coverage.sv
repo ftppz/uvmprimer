@@ -89,7 +89,7 @@ module coverage(tinyalu_bfm bfm);
 
       }
 
-endgroup
+   endgroup
 
    op_cov oc;
    zeros_or_ones_on_ops c_00_FF;

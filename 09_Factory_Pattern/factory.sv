@@ -37,7 +37,7 @@ endclass : animal
 
 class lion extends animal;
 
-   bit              thorn_in_paw = 0;
+   bit              thorn_in_paw = 1;
 
    function new(int age, string n);
       super.new(age, n);
@@ -121,7 +121,7 @@ module top;
       animal_h.make_sound();
 
       cast_ok = $cast(lion_h, animal_h);
-      if ( ! cast_ok) 
+      if (!cast_ok) 
         $fatal(1, "Failed to cast animal_h to lion_h");
       
       if (lion_h.thorn_in_paw) $display("He looks angry!");

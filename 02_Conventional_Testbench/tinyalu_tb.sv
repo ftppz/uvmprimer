@@ -20,7 +20,8 @@ module top;
                           and_op = 3'b010,
                           xor_op = 3'b011,
                           mul_op = 3'b100,
-                          rst_op = 3'b111} operation_t;
+                          rst_op = 3'b111} operation_t; // for testbench convenvience
+                          
    byte         unsigned        A;
    byte         unsigned        B;
    bit          clk;
@@ -33,24 +34,24 @@ module top;
 
    assign op = op_set;
 
-   tinyalu DUT (.A, .B, .clk, .op, .reset_n, .start, .done, .result);
+   tinyalu DUT (.A, .B, .clk, .op, .reset_n, .start, .done, .result); // bad ins example
 
 
 
    covergroup op_cov;
 
-      coverpoint op_set {
+      coverpoint op_set { // cover operation_t
          bins single_cycle[] = {[add_op : xor_op], rst_op,no_op};
          bins multi_cycle = {mul_op};
 
          bins opn_rst[] = ([add_op:mul_op] => rst_op);
-         bins rst_opn[] = (rst_op => [add_op:mul_op]);
+         bins rst_opn[] = (rst_op => [add_op:mul_op]); // rst to open
 
-         bins sngl_mul[] = ([add_op:xor_op],no_op => mul_op);
-         bins mul_sngl[] = (mul_op => [add_op:xor_op], no_op);
+         bins sngl_mul[] = ([add_op:xor_op],no_op => mul_op); // single to mul
+         bins mul_sngl[] = (mul_op => [add_op:xor_op], no_op); // mul to single
 
-         bins twoops[] = ([add_op:mul_op] [* 2]);
-         bins manymult = (mul_op [* 3:5]);
+         bins twoops[] = ([add_op:mul_op] [* 2]); // repeat op
+         bins manymult = (mul_op [* 3:5]); // many mul_op
 
 
       }
@@ -60,7 +61,7 @@ module top;
    covergroup zeros_or_ones_on_ops;
 
       all_ops : coverpoint op_set {
-         ignore_bins null_ops = {rst_op, no_op};}
+         ignore_bins null_ops = {rst_op, no_op};} // not is enclose 
 
       a_leg: coverpoint A {
          bins zeros = {'h00};
@@ -75,7 +76,7 @@ module top;
       }
 
       op_00_FF:  cross a_leg, b_leg, all_ops {
-         bins add_00 = binsof (all_ops) intersect {add_op} &&
+         bins add_00 = binsof (all_ops) intersect {add_op} && // use add_op must use binsof (x) intersect (y)
                        (binsof (a_leg.zeros) || binsof (b_leg.zeros));
 
          bins add_FF = binsof (all_ops) intersect {add_op} &&
@@ -158,7 +159,7 @@ module top;
       else if (zero_ones == 2'b11)
         return 8'hFF;
       else
-        return $random;
+        return zero_ones;
    endfunction : get_data
 
    always @(posedge done) begin : scoreboard
@@ -212,7 +213,8 @@ module top;
       end
       $stop;
    end : tester
-endmodule : top
+
+endmodule
 
 
 

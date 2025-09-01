@@ -45,7 +45,7 @@ class lion extends animal;
    endfunction : new
 
    function void make_sound();
-      $display ("The lion, %s, says Roar", get_name());
+      $display ("The lion, %s, says aWoW", get_name());
    endfunction : make_sound
 
 
@@ -59,7 +59,7 @@ class chicken extends animal;
    endfunction : new
 
    function void make_sound();
-      $display ("The Chicken, %s, says BECAWW", get_name());
+      $display ("The Chicken, %s, says iKUN", get_name());
    endfunction : make_sound
 
 

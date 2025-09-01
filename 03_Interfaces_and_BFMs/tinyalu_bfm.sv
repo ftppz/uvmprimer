@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-interface tinyalu_bfm;
+interface tinyalu_bfm; // Bus Functional Model
    import tinyalu_pkg::*;
 
    byte         unsigned        A;
@@ -37,7 +37,7 @@ interface tinyalu_bfm;
    end
 
 
-   task reset_alu();
+   task reset_alu(); // jsut reset
       reset_n = 1'b0;
       @(negedge clk);
       @(negedge clk);
@@ -65,7 +65,7 @@ interface tinyalu_bfm;
             @(posedge clk);
             #1;
             start = 1'b0;           
-         end else begin
+         end else begin // normal operation
             do
               @(negedge clk);
             while (done == 0);

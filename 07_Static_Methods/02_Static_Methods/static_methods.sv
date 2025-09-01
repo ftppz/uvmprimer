@@ -79,7 +79,7 @@ module top;
 
    initial begin
       lion   lion_h;
-      lion_h  = new(2,  "Kimba");
+      lion_h  = new(2,  "Kimba"); // age, name
       lion_cage::cage_lion(lion_h);
       lion_h  = new(3,  "Simba");
       lion_cage::cage_lion(lion_h);

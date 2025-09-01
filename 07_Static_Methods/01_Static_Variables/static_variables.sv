@@ -58,7 +58,7 @@ endclass : lion
 
 class lion_cage;
 
-    static lion cage[$];
+   static lion cage[$];
    
 endclass : lion_cage
 
