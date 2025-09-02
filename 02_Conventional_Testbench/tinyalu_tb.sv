@@ -211,7 +211,7 @@ module top;
            end
          endcase // case (op_set)
       end
-      $stop;
+      $finish;
    end : tester
 
 endmodule
