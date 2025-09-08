@@ -7,8 +7,8 @@ module tinyalu (input [7:0] A,
 		output done,
 		output [15:0] result);
 
-	wire [15:0] 		      result_aax, result_mult;
-	wire 		      start_single, start_mult;
+	wire [15:0] 		result_aax, result_mult;
+	wire 		      	start_single, start_mult;
 
 	assign start_single = start & ~op[2];
 	assign start_mult   = start & op[2];
@@ -38,19 +38,19 @@ module single_cycle(input [7:0] A,
 
 	always @(posedge clk)
 		if (!reset_n)
-		result <= 0;
+			result <= 0;
 		else
-		case(op)
-			3'b001 : result <= A + B;
-			3'b010 : result <= A & B;
-			3'b011 : result <= A ^ B;
-		endcase // case (op)
+			case(op)
+				3'b001 : result <= A + B;
+				3'b010 : result <= A & B;
+				3'b011 : result <= A ^ B;
+			endcase // case (op)
 
 	always @(posedge clk)
 		if (!reset_n)
-		done <= 0;
+			done <= 0;
 		else
-		done =  ((start == 1'b1) && (op != 3'b000));
+			done =  ((start == 1'b1) && (op != 3'b000));
 
 endmodule : single_cycle
 
@@ -64,9 +64,9 @@ module three_cycle(input [7:0] A,
 		   output logic done,
 		   output logic [15:0] result);
 
-	logic [7:0] 			       a_int, b_int;
-	logic [15:0] 		       mult1, mult2;
-	logic 			       done1, done2, done3;
+	logic [7:0]		a_int, b_int;
+	logic [15:0]	mult1, mult2;
+	logic			done1, done2, done3;
 
 	always @(posedge clk)
 		if (!reset_n) begin
@@ -90,11 +90,6 @@ module three_cycle(input [7:0] A,
 			done1  <= done2 & !done;
 			done   <= done1 & !done;
 		end // else: !if(!reset_n)
-		
+
 endmodule : three_cycle
 
-	
-	
-   
-   
-  
