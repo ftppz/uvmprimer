@@ -60,7 +60,7 @@ class random_tester;
 			iB = get_data();
 			bfm.send_op(iA, iB, op_set, result);
 		end : random_loop
-		#500;
+	#500;
 	endtask : execute
 
 endclass : random_tester

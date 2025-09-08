@@ -47,7 +47,8 @@ class base_tester extends uvm_component;
 			command.B =  get_data();
 			command_port.put(command);
 		end : random_loop
-		#500;
+	
+	#500;
 		phase.drop_objection(this);
 	endtask : run_phase
 

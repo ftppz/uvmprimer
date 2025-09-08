@@ -44,7 +44,8 @@ class base_tester extends uvm_component;
 			iB = get_data();
 			bfm.send_op(iA, iB, op_set, result);
 		end : random_loop
-		#500;
+	
+	#500;
 		phase.drop_objection(this);
 	endtask : run_phase
 

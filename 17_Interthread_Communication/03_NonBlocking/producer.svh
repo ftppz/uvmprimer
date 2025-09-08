@@ -27,11 +27,13 @@ class producer extends uvm_component;
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
 		repeat (3) begin
-			#17;
+		
+		#17;
 			put_port_h.put(++shared);
 			$display("%0tns  Sent %0d", $time, shared);
 		end
-		#17;
+	
+	#17;
 		phase.drop_objection(this);
 	endtask : run_phase
 

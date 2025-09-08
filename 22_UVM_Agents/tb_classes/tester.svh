@@ -47,7 +47,7 @@ class tester extends uvm_component;
 		command.B = 8'hFF;
 		command_port.put(command);
 
-		#500;
+	#500;
 		phase.drop_objection(this);
 	endtask : run_phase
 endclass : tester
