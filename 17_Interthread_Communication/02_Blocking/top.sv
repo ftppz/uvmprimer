@@ -14,12 +14,12 @@
    limitations under the License.
 */
 module top;
-   import uvm_pkg::*;
+	import uvm_pkg::*;
 `include "uvm_macros.svh"
 
-   import example_pkg::*;
+	import example_pkg::*;
 
-   initial run_test("communication_test");
+	initial run_test("communication_test");
 endmodule : top
 
      

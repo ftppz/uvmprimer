@@ -14,22 +14,22 @@
    limitations under the License.
 */
 class maxmult_sequence extends uvm_sequence #(sequence_item);
-   `uvm_object_utils(maxmult_sequence);
+	`uvm_object_utils(maxmult_sequence);
 
-   sequence_item command;
+	sequence_item command;
 
-   function new(string name = "maxmult_sequence");
-      super.new(name);
-   endfunction : new
+	function new(string name = "maxmult_sequence");
+		super.new(name);
+	endfunction : new
 
 
-   task body();
-      command = sequence_item::type_id::create("command");
-      start_item(command);
-      command.op = mul_op;
-      command.A = 8'hFF;
-      command.B = 8'hFF;
-      finish_item(command);
-   endtask : body
-   
+	task body();
+		command = sequence_item::type_id::create("command");
+		start_item(command);
+		command.op = mul_op;
+		command.A = 8'hFF;
+		command.B = 8'hFF;
+		finish_item(command);
+	endtask : body
+	
 endclass : maxmult_sequence

@@ -14,20 +14,20 @@
    limitations under the License.
 */
 class fibonacci_test extends tinyalu_base_test;
-   `uvm_component_utils(fibonacci_test);
+	`uvm_component_utils(fibonacci_test);
 
-   task run_phase(uvm_phase phase);
-      fibonacci_sequence fibonacci;
-      fibonacci = new("fibonacci");
+	task run_phase(uvm_phase phase);
+		fibonacci_sequence fibonacci;
+		fibonacci = new("fibonacci");
 
-      phase.raise_objection(this);
-      fibonacci.start(sequencer_h);
-      phase.drop_objection(this);
-   endtask : run_phase
-      
-   function new(string name, uvm_component parent);
-      super.new(name,parent);
-   endfunction : new
+		phase.raise_objection(this);
+		fibonacci.start(sequencer_h);
+		phase.drop_objection(this);
+	endtask : run_phase
+		
+	function new(string name, uvm_component parent);
+		super.new(name,parent);
+	endfunction : new
 
 endclass
 

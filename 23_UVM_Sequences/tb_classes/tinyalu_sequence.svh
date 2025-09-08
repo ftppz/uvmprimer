@@ -15,11 +15,11 @@
 */
 class tinyalu_sequence extends uvm_sequence #(tinyalu_sequence_item);
 
-   tinyalu_sequence_item command;
-   
-   task body();
-      $fatal(1,"You cannot use tinalu_sequence directly. You must override it");
-   endtask : body
+	tinyalu_sequence_item command;
+	
+	task body();
+		$fatal(1,"You cannot use tinalu_sequence directly. You must override it");
+	endtask : body
 
 endclass : tinyalu_sequence
 

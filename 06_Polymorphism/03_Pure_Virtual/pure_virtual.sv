@@ -14,39 +14,39 @@
    limitations under the License.
 */
 virtual class animal;
-   int age=-1;
+	int age=-1;
 
-   function new(int a);
-      age = a;
-   endfunction : new
+	function new(int a);
+		age = a;
+	endfunction : new
 
-   pure virtual function void make_sound(); // must be override
+	pure virtual function void make_sound(); // must be override
 
 endclass : animal
 
 
 class lion extends animal;
 
-   function new(int age);
-      super.new(age);
-   endfunction : new
+	function new(int age);
+		super.new(age);
+	endfunction : new
 
-   function void make_sound();
-      $display ("The Lion says aWoW");
-   endfunction : make_sound
+	function void make_sound();
+		$display ("The Lion says aWoW");
+	endfunction : make_sound
 
 endclass : lion
 
 
 class chicken extends animal;
 
-   function new(int age);
-      super.new(age);
-   endfunction : new
+	function new(int age);
+		super.new(age);
+	endfunction : new
 
-   function void make_sound();
-      $display ("The Chicken says iKUN");
-   endfunction : make_sound
+	function void make_sound();
+		$display ("The Chicken says iKUN");
+	endfunction : make_sound
 
 endclass : chicken
 
@@ -54,31 +54,31 @@ endclass : chicken
 module top;
 
 
-   initial begin
-   
-      lion   lion_h;
-      chicken  chicken_h;
-      animal animal_h;
-   
-      animal_h = new(3); // vcs will error
-      
-      lion_h  = new(15);
-      lion_h.make_sound();
-      $display("The Lion is %0d years old\n", lion_h.age);
-      
-      chicken_h = new(1);
-      chicken_h.make_sound();
-      $display("The Chicken is %0d years old\n", chicken_h.age);
+	initial begin
+	
+		lion   lion_h;
+		chicken  chicken_h;
+		animal animal_h;
+	
+		animal_h = new(3); // vcs will error
+		
+		lion_h  = new(15);
+		lion_h.make_sound();
+		$display("The Lion is %0d years old\n", lion_h.age);
+		
+		chicken_h = new(1);
+		chicken_h.make_sound();
+		$display("The Chicken is %0d years old\n", chicken_h.age);
 
-      animal_h = lion_h;
-      animal_h.make_sound();
-      $display("The animal is %0d years old\n", animal_h.age);
-      
-      animal_h = chicken_h;
-      animal_h.make_sound();
-      $display("The animal is %0d years old\n", animal_h.age);
-      
-   end // initial begin
+		animal_h = lion_h;
+		animal_h.make_sound();
+		$display("The animal is %0d years old\n", animal_h.age);
+		
+		animal_h = chicken_h;
+		animal_h.make_sound();
+		$display("The animal is %0d years old\n", animal_h.age);
+		
+	end // initial begin
 
 endmodule : top
 

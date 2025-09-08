@@ -14,19 +14,19 @@
    limitations under the License.
 */
 module top;
-   tinyalu_bfm    bfm();
-   tester     tester_i    (bfm);
-   coverage   coverage_i  (bfm);
-   scoreboard scoreboard_i(bfm);
-   
-   tinyalu DUT (  .A(bfm.A), 
-                  .B(bfm.B), 
-                  .clk(bfm.clk),
-                  .op(bfm.op), 
-                  .reset_n(bfm.reset_n), 
-                  .start(bfm.start), 
-                  .done(bfm.done), 
-                  .result(bfm.result));
+	tinyalu_bfm    bfm();
+	tester     tester_i    (bfm);
+	coverage   coverage_i  (bfm);
+	scoreboard scoreboard_i(bfm);
+	
+	tinyalu DUT (  .A(bfm.A), 
+					.B(bfm.B), 
+					.clk(bfm.clk),
+					.op(bfm.op), 
+					.reset_n(bfm.reset_n), 
+					.start(bfm.start), 
+					.done(bfm.done), 
+					.result(bfm.result));
 endmodule : top
 
      

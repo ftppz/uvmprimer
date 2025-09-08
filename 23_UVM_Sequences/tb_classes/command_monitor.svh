@@ -14,37 +14,37 @@
    limitations under the License.
 */
 class command_monitor extends uvm_component;
-   `uvm_component_utils(command_monitor);
+	`uvm_component_utils(command_monitor);
 
-   virtual tinyalu_bfm bfm;
-   uvm_analysis_port #(sequence_item) ap;
+	virtual tinyalu_bfm bfm;
+	uvm_analysis_port #(sequence_item) ap;
 
-   function new (string name, uvm_component parent);
-      super.new(name,parent);
-   endfunction
+	function new (string name, uvm_component parent);
+		super.new(name,parent);
+	endfunction
 
-   function void build_phase(uvm_phase phase);
+	function void build_phase(uvm_phase phase);
 
-      if(!uvm_config_db #(virtual tinyalu_bfm)::get(null, "*","bfm", bfm))
-        `uvm_fatal("DRIVER", "Failed to get BFM")
+		if(!uvm_config_db #(virtual tinyalu_bfm)::get(null, "*","bfm", bfm))
+			`uvm_fatal("DRIVER", "Failed to get BFM")
 
-      ap  = new("ap",this);
-   endfunction : build_phase
+		ap  = new("ap",this);
+	endfunction : build_phase
 
-   function void connect_phase(uvm_phase phase);
-      bfm.command_monitor_h = this;
-   endfunction : connect_phase
+	function void connect_phase(uvm_phase phase);
+		bfm.command_monitor_h = this;
+	endfunction : connect_phase
 
-   function void write_to_monitor(byte A, byte B, operation_t op);
-      sequence_item cmd;
-      `uvm_info ("COMMAND MONITOR", $sformatf("MONITOR: A: %2h  B: %2h  op: %s",
-                A, B, op.name()), UVM_HIGH);
-      cmd = new("cmd");
-      cmd.A = A;
-      cmd.B = B;
-      cmd.op = op;
-      ap.write(cmd);
-   endfunction : write_to_monitor
+	function void write_to_monitor(byte A, byte B, operation_t op);
+		sequence_item cmd;
+		`uvm_info ("COMMAND MONITOR", $sformatf("MONITOR: A: %2h  B: %2h  op: %s",
+					A, B, op.name()), UVM_HIGH);
+		cmd = new("cmd");
+		cmd.A = A;
+		cmd.B = B;
+		cmd.op = op;
+		ap.write(cmd);
+	endfunction : write_to_monitor
 endclass : command_monitor
 
 

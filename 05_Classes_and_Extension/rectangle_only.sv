@@ -13,31 +13,28 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-  class rectangle;
-    int length;
-    int width;
-    
-    function new(int l, int w);
-      length = l;
-      width  = w;
-    endfunction
-    
-    function int area;
-      return length * width;
-    endfunction
-  endclass : rectangle
+class rectangle;
+	int length;
+	int width;
 
-  
-  module top_rectangle ;
+	function new(int l, int w);
+		length = l;
+		width  = w;
+	endfunction
 
-    rectangle rectangle_h;
+	function int area;
+		return length * width;
+	endfunction
+endclass : rectangle
 
-    initial begin
 
-      rectangle_h = new(.l(50),.w(20));
+module top_rectangle ;
 
-      $display("rectangle area: %0d", rectangle_h.area());
+	rectangle rectangle_h;
 
-    end
+	initial begin
+		rectangle_h = new(.l(50),.w(20));
+		$display("rectangle area: %0d", rectangle_h.area());
+	end
 endmodule : top_rectangle
 

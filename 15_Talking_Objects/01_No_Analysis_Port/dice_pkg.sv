@@ -14,7 +14,7 @@
    limitations under the License.
 */
 package dice_pkg;
-   import uvm_pkg::*;
+   	import uvm_pkg::*;
 `include "uvm_macros.svh"
    
 `include "dice_roller.svh"       

@@ -14,21 +14,21 @@
    limitations under the License.
 */
 class runall_sequence extends tinyalu_sequence;
-   `uvm_object_utils(tinyalu_runall_sequence);
+	`uvm_object_utils(tinyalu_runall_sequence);
 
-   reset_sequence reset;
-   maxmult_sequence maxmult;
-   random_sequence random;
-   
-   task body();
-      reset = reset_sequence::type_id::create("reset");
-      maxmult = maxmult_sequence::type_id::create("maxmult");
-      random = random_sequence::type_id::create("random");
+	reset_sequence reset;
+	maxmult_sequence maxmult;
+	random_sequence random;
+	
+	task body();
+		reset = reset_sequence::type_id::create("reset");
+		maxmult = maxmult_sequence::type_id::create("maxmult");
+		random = random_sequence::type_id::create("random");
 
-      reset.start(m_sequencer);
-      maxmult.start(m_sequencer);
-      random.start(m_sequencer);
-   endtask : body
+		reset.start(m_sequencer);
+		maxmult.start(m_sequencer);
+		random.start(m_sequencer);
+	endtask : body
 endclass : tinyalu_runall_sequence
 
      

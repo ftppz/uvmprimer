@@ -14,22 +14,22 @@
    limitations under the License.
 */
 module top;
-  import   tinyalu_pkg::*;
+	import   tinyalu_pkg::*;
 `include "tinyalu_macros.svh"
-   
-   tinyalu DUT (.A(bfm.A), .B(bfm.B), .op(bfm.op), 
-                .clk(bfm.clk), .reset_n(bfm.reset_n), 
-                .start(bfm.start), .done(bfm.done), .result(bfm.result));
 
-   tinyalu_bfm     bfm();
+	tinyalu DUT (.A(bfm.A), .B(bfm.B), .op(bfm.op), 
+					.clk(bfm.clk), .reset_n(bfm.reset_n), 
+					.start(bfm.start), .done(bfm.done), .result(bfm.result));
 
-   testbench    testbench_h;
-   
+	tinyalu_bfm     bfm();
 
-   initial begin
-      testbench_h = new(bfm);
-      testbench_h.execute();
-   end
+	testbench    testbench_h;
+	
+
+	initial begin
+		testbench_h = new(bfm);
+		testbench_h.execute();
+	end
    
 endmodule : top
 

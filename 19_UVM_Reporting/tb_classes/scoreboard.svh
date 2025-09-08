@@ -23,39 +23,43 @@ class scoreboard extends uvm_subscriber #(shortint);
       cmd_f = new ("cmd_f", this);
    endfunction : build_phase 
 
-   function void write(shortint t);
-      shortint predicted_result;
-      string data_str;
-      command_s cmd; 
-      cmd.A = 0;
-      cmd.B = 0;
-      cmd.op = no_op;
-      do
-
-        if (!cmd_f.try_get(cmd))
-          `uvm_fatal("SCOREBOARD", "Missing command in self checker")
-            while ((cmd.op == no_op) || (cmd.op == rst_op));
-
-      case (cmd.op)
-        add_op: predicted_result = cmd.A + cmd.B + 1; //force an error on adds
-        and_op: predicted_result = cmd.A & cmd.B;
-        xor_op: predicted_result = cmd.A ^ cmd.B;
-        mul_op: predicted_result = cmd.A * cmd.B;
-      endcase // case (op_set)
-
-      data_str = $sformatf(" %2h %0s %2h = %4h (%4h predicted)",
-                           cmd.A, cmd.op.name() ,cmd.B, t,  predicted_result);
-
-      if (predicted_result != t) 
-        `uvm_error ("SCOREBOARD", {"FAIL: ",data_str})
-          else
-        `uvm_info ( "SCOREBOARD", {"PASS: ",data_str}, UVM_HIGH)
-  
-   endfunction : write
-      
-   function new (string name, uvm_component parent);
-      super.new(name, parent);
-   endfunction : new
+	function void write(shortint t);
+		shortint predicted_result;
+		string data_str;
+		command_s cmd; 
+		
+		// Initialize the command
+		cmd.A = 0;
+		cmd.B = 0;
+		cmd.op = no_op;
+		
+		// Get command from the FIFO
+		do begin
+			if (!cmd_f.try_get(cmd)) begin
+				`uvm_fatal("SCOREBOARD", "Missing command in self checker");
+			end
+		end while ((cmd.op == no_op) || (cmd.op == rst_op));
+		// Predict the result based on the operation
+		case (cmd.op)
+			add_op: predicted_result = cmd.A + cmd.B + 1; // force an error on adds
+			and_op: predicted_result = cmd.A & cmd.B;
+			xor_op: predicted_result = cmd.A ^ cmd.B;
+			mul_op: predicted_result = cmd.A * cmd.B;
+		endcase
+		// Format the output string
+		data_str = $sformatf(" %2h %0s %2h = %4h (%4h predicted)",
+							cmd.A, cmd.op.name(), cmd.B, t, predicted_result);
+		// Compare predicted and actual results
+		if (predicted_result != t) begin
+			`uvm_error("SCOREBOARD", {"FAIL: ", data_str});
+		end else begin
+			`uvm_info("SCOREBOARD", {"PASS: ", data_str}, UVM_HIGH);
+		end
+	endfunction : write
+		
+	function new (string name, uvm_component parent);
+		super.new(name, parent);
+	endfunction : new
 endclass : scoreboard
 
 
