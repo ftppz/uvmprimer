@@ -13,6 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+`include "dice_pkg.sv"
 module top;
    	import uvm_pkg::*;
 `include "uvm_macros.svh"
