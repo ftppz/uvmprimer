@@ -28,14 +28,14 @@ class dice_roller extends uvm_component;
 
 	function byte two_dice();
 		byte the_roll;
-		void'(randomize());
+		if (!randomize()) begin
+			`uvm_error("ROLL_FAIL", "Randomization failed")
+			return 0;  
+		end
 		the_roll = die1 + die2;
 		return the_roll;
 	endfunction : two_dice
 
 endclass : dice_roller
 
-
-      
-
-   
+  
