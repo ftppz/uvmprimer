@@ -30,7 +30,6 @@ class dice_roller extends uvm_component;
 	constraint d6 { die1 >= 1; die1 <= 6; 
 					die2 >= 1; die2 <= 6; }
 
-
 	task run_phase(uvm_phase phase);
 		int the_roll;
 		phase.raise_objection(this);
@@ -42,8 +41,6 @@ class dice_roller extends uvm_component;
 		end
 		phase.drop_objection(this);
 	endtask : run_phase
-	
-
 
 	function new(string name, uvm_component parent);
 		super.new(name,parent);
@@ -51,7 +48,3 @@ class dice_roller extends uvm_component;
 	
 endclass : dice_roller
 
-
-      
-
-   

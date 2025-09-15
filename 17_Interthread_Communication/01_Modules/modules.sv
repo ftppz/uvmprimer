@@ -14,25 +14,31 @@
    limitations under the License.
 */
 module producer(output byte shared, input bit put_it, output bit get_it);
-	initial
+	initial begin
+		shared = 0;
+		get_it = 0;
 		repeat(3) begin 
 			$display("Sent %0d", ++shared);
 			get_it = ~get_it;
 			@(put_it);
 		end
+	end
 endmodule : producer
 
 module consumer(input byte shared,  output bit put_it, input bit get_it);
-	initial
+	initial begin
+		put_it = 0;
 		forever begin
 			@(get_it);
 			$display("Received: %0d", shared);
 			put_it = ~put_it;
 		end
+	end
 endmodule : consumer
 
 module top; 
 	byte shared;
+	bit get_it, put_it;
 	producer p (shared, put_it, get_it);
 	consumer c (shared, put_it, get_it);
 endmodule : top

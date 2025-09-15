@@ -29,9 +29,6 @@ interface tinyalu_bfm;
 	wire [15:0]  result;
 	operation_t  op_set;
 
-
-	
-	
 	assign op = op_set;
 
 	task reset_alu();
@@ -79,8 +76,8 @@ interface tinyalu_bfm;
 			new_command = 1;
 		else
 			if (new_command) begin 
-			command_monitor_h.write_to_monitor(A, B, op);
-			new_command = (op == 3'b000); // handle no_op
+				command_monitor_h.write_to_monitor(A, B, op);
+				new_command = (op == 3'b000); // handle no_op
 			end 
 	end : cmd_monitor
 
@@ -91,7 +88,7 @@ interface tinyalu_bfm;
 	
 
 	always @(posedge clk) begin : rslt_monitor
-			if (done) 
+		if (done) 
 			result_monitor_h.write_to_monitor(result);
 	end : rslt_monitor
 	

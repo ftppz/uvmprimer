@@ -17,7 +17,6 @@ class histogram extends uvm_subscriber #(int);
 	`uvm_component_utils(histogram);
 
 	int rolls[int];
-	
 
 	function new(string name, uvm_component parent);
 		super.new(name,parent);

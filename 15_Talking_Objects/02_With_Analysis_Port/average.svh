@@ -31,7 +31,6 @@ class average extends uvm_subscriber #(int);
 	endfunction : write
 
 	function void report_phase(uvm_phase phase);
-		
 		$display ("DICE AVERAGE: %2.1f",dice_total/count);
 	endfunction : report_phase
 	
