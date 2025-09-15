@@ -16,7 +16,7 @@
 class random_tester extends base_tester;
 	`uvm_component_utils (random_tester)
 
-		virtual function operation_t get_op();
+	virtual function operation_t get_op();
 		bit [2:0] op_choice;
 		op_choice = $random;
 		case (op_choice)
@@ -29,9 +29,9 @@ class random_tester extends base_tester;
 			3'b110 : return rst_op;
 			3'b111 : return rst_op;
 		endcase // case (op_choice)
-		endfunction : get_op
+	endfunction : get_op
 
-	virtual 	  function byte get_data();
+	virtual function byte get_data();
 		bit [1:0]   zero_ones;
 		zero_ones = $random;
 		if (zero_ones == 2'b00)
