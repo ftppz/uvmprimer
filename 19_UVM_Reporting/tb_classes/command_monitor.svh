@@ -43,7 +43,7 @@ class command_monitor extends uvm_component;
 			3'b011 : return xor_op;
 			3'b100 : return mul_op;
 			3'b111 : return rst_op;
-			default : $fatal($sprintf("Illegal operation on op bus: %3b",op));
+			default : $fatal($sformatf("Illegal operation on op bus: %3b",op));
 		endcase // case (op)
 	endfunction : op2enum
 	

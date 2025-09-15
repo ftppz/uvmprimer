@@ -18,7 +18,6 @@ class scoreboard extends uvm_subscriber #(shortint);
 
    uvm_tlm_analysis_fifo #(command_s) cmd_f;
 
-
    function void build_phase(uvm_phase phase);
       cmd_f = new ("cmd_f", this);
    endfunction : build_phase 

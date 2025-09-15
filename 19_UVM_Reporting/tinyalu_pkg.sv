@@ -36,7 +36,7 @@ typedef struct {
    
 
 `include "coverage.svh"
-`include "base_tester.svh"
+`include "vcs_base_tester.svh"
 `include "random_tester.svh"
 `include "add_tester.svh"   
 `include "scoreboard.svh"

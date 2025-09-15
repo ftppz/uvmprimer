@@ -14,13 +14,6 @@
    limitations under the License.
 */
 
-interface clk_bfm;
-	bit clk;
-	initial clk = 0;
-	always #7 clk = ~clk;
-endinterface : clk_bfm
-
-
 module top;
 	import uvm_pkg::*;
 `include "uvm_macros.svh"
@@ -35,3 +28,12 @@ module top;
 	end
 
 endmodule : top
+
+interface clk_bfm;
+	bit clk;
+	initial clk = 0;
+	always #7 clk = ~clk;
+endinterface : clk_bfm
+
+
+

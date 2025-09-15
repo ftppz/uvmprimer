@@ -15,12 +15,12 @@
 */
 module top;
 	import uvm_pkg::*;
-	import   tinyalu_pkg::*;
+	import tinyalu_pkg::*;
 `include "tinyalu_macros.svh"
 `include "uvm_macros.svh"
 	
 	tinyalu_bfm       bfm();
-	tinyalu DUT (.A(bfm.A), .B(bfm.B), .op(bfm.op), 
+	tinyalu DUT (   .A(bfm.A), .B(bfm.B), .op(bfm.op), 
 					.clk(bfm.clk), .reset_n(bfm.reset_n), 
 					.start(bfm.start), .done(bfm.done), .result(bfm.result));
 

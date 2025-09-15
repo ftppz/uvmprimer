@@ -1,3 +1,3 @@
-tinyalu_dut/single_cycle_add_and_xor.vhd
-tinyalu_dut/three_cycle_mult.vhd
-tinyalu_dut/tinyalu.vhd
+tinyalu_dut/single_cycle_add_and_xor.sv
+tinyalu_dut/three_cycle_mult.sv
+tinyalu_dut/tinyalu.sv
