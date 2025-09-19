@@ -16,11 +16,25 @@
 class result_transaction extends uvm_transaction;
 
 	shortint result;
+	
+	function bit do_compare(uvm_object rhs, uvm_comparer comparer);
+		result_transaction RHS;
+		bit same;
+		
+		if (rhs == null) begin
+			`uvm_error("COMPARE", "Attempted to compare with null transaction")
+			return 0;
+		end
 
-	function new(string name = "");
-		super.new(name);
-	endfunction : new
+		if (!$cast(RHS, rhs)) begin
+			return 0;
+		end else begin
+			same = super.do_compare(rhs, comparer);
+			same = (result == RHS.result) && same;
+		end
 
+		return same;
+	endfunction : do_compare
 
 	function void do_copy(uvm_object rhs);
 		result_transaction copied_transaction_h;
@@ -37,21 +51,12 @@ class result_transaction extends uvm_transaction;
 		s = $sformatf("result: %4h",result);
 		return s;
 	endfunction : convert2string
-
-	function bit do_compare(uvm_object rhs, uvm_comparer comparer);
-		result_transaction RHS;
-		bit    same;
-		assert(rhs != null) else
-			$fatal(1,"Tried to copare null transaction");
-
-		same = super.do_compare(rhs, comparer);
-
-		$cast(RHS, rhs);
-		same = (result == RHS.result) && same;
-		return same;
-	endfunction : do_compare
 	
-        
+	function new(string name = "");
+		super.new(name);
+	endfunction : new
+
+
 
 endclass : result_transaction
 

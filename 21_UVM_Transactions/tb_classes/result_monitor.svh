@@ -19,6 +19,13 @@ class result_monitor extends uvm_component;
 	virtual tinyalu_bfm bfm;
 	uvm_analysis_port #(result_transaction) ap;
 
+	function void write_to_monitor(shortint r);
+		result_transaction result_t;
+		result_t = new("result_t");
+		result_t.result = r;
+		ap.write(result_t);
+	endfunction : write_to_monitor
+	 
 	function new (string name, uvm_component parent);
 		super.new(name, parent);
 	endfunction : new
@@ -31,13 +38,6 @@ class result_monitor extends uvm_component;
 		ap  = new("ap",this);
 	endfunction : build_phase
 
-	function void write_to_monitor(shortint r);
-		result_transaction result_t;
-		result_t = new("result_t");
-		result_t.result = r;
-		ap.write(result_t);
-	endfunction : write_to_monitor
-	
 endclass : result_monitor
 
 

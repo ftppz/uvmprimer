@@ -4,4 +4,3 @@ work
 transcript
 *.code-workspace
 .config
-Makefile

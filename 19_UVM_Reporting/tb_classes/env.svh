@@ -36,14 +36,14 @@ class env extends uvm_env;
 		
 	endfunction : build_phase
 
-	// function void end_of_elaboration_phase(uvm_phase phase);
-	// 	scoreboard_h.set_report_severity_action_hier(UVM_ERROR, UVM_NO_ACTION);
-	// endfunction : end_of_elaboration_phase
-
-
 	function void end_of_elaboration_phase(uvm_phase phase);
-		scoreboard_h.set_report_verbosity_level_hier(UVM_HIGH);
+		scoreboard_h.set_report_severity_action_hier(UVM_ERROR, UVM_NO_ACTION);
 	endfunction : end_of_elaboration_phase
+
+
+	// function void end_of_elaboration_phase(uvm_phase phase);
+	// 	scoreboard_h.set_report_verbosity_level_hier(UVM_HIGH);
+	// endfunction : end_of_elaboration_phase
    
 
 	function void connect_phase(uvm_phase phase);

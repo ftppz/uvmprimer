@@ -20,6 +20,17 @@ class command_monitor extends uvm_component;
 
 	uvm_analysis_port #(command_transaction) ap;
 
+	function void write_to_monitor(byte A, byte B, operation_t op);
+		command_transaction cmd;
+		`uvm_info("COMMAND MONITOR",$sformatf("MONITOR: A: %2h  B: %2h  op: %s",
+					A, B, op.name()), UVM_HIGH);
+		cmd = new("cmd");
+		cmd.A = A;
+		cmd.B = B;
+		cmd.op = op;
+		ap.write(cmd);
+	endfunction : write_to_monitor
+
 	function new (string name, uvm_component parent);
 		super.new(name,parent);
 	endfunction
@@ -31,16 +42,6 @@ class command_monitor extends uvm_component;
 		ap  = new("ap",this);
 	endfunction : build_phase
 
-	function void write_to_monitor(byte A, byte B, operation_t op);
-		command_transaction cmd;
-		`uvm_info("COMMAND MONITOR",$sformatf("MONITOR: A: %2h  B: %2h  op: %s",
-					A, B, op.name()), UVM_HIGH);
-		cmd = new("cmd");
-		cmd.A = A;
-		cmd.B = B;
-		cmd.op = op;
-		ap.write(cmd);
-	endfunction : write_to_monitor
 endclass : command_monitor
 
 

@@ -19,7 +19,7 @@ class command_transaction extends uvm_transaction;
 	rand byte unsigned        B;
 	rand operation_t         op;
 
-	constraint data { A dist {8'h00:=1, [8'h01 : 8'hFE]:=1, 8'hFF:=1};
+	constraint data { 	A dist {8'h00:=1, [8'h01 : 8'hFE]:=1, 8'hFF:=1};
 						B dist {8'h00:=1, [8'h01 : 8'hFE]:=1, 8'hFF:=1};} 
 	
 	

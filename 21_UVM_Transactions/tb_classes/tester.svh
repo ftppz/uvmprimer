@@ -17,11 +17,7 @@ class tester extends uvm_component;
 	`uvm_component_utils (tester)
 
 	uvm_put_port #(command_transaction) command_port;
-
-	function new (string name, uvm_component parent);
-		super.new(name, parent);
-	endfunction : new
-
+	
 	function void build_phase(uvm_phase phase);
 		command_port = new("command_port", this);
 	endfunction : build_phase
@@ -51,6 +47,9 @@ class tester extends uvm_component;
 		phase.drop_objection(this);
 	endtask : run_phase
 	
+	function new (string name, uvm_component parent);
+		super.new(name, parent);
+	endfunction : new
 endclass : tester
 
 
