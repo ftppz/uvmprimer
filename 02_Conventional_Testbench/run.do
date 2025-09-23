@@ -17,8 +17,8 @@ set NoQuitOnFinish 1
 onbreak {resume}
 log /* -r
 run -all
-coverage exclude -src ../../tinyalu_dut/single_cycle_add_and_xor.vhd -line 49 -code s
-coverage exclude -src ../../tinyalu_dut/single_cycle_add_and_xor.vhd -scope /top/DUT/add_and_xor -line 49 -code b
+coverage exclude -src ../../tinyalu_dut/single_cycle_add_and_xor.sv -line 49 -code s
+coverage exclude -src ../../tinyalu_dut/single_cycle_add_and_xor.sv -scope /top/DUT/add_and_xor -line 49 -code b
 coverage save tinyalu.ucdb
 vcover report tinyalu.ucdb 
 vcover report tinyalu.ucdb -cvg -details

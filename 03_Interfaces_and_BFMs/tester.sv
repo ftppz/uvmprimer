@@ -55,7 +55,7 @@ module tester(tinyalu_bfm bfm);
 			iB = get_data();
 			bfm.send_op(iA, iB, op_set, result);
 		end : random_loop
-		$stop;
+		$finish;
 	end // initial begin
 endmodule : tester
 
