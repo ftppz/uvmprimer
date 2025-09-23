@@ -13,13 +13,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-`ifdef QUESTA
-virtual class base_tester extends uvm_component;
-`else
 class base_tester extends uvm_component;
-`endif
-
-`uvm_component_utils(base_tester)
+	`uvm_component_utils(base_tester)
 	virtual tinyalu_bfm bfm;
 
 	function void build_phase(uvm_phase phase);
