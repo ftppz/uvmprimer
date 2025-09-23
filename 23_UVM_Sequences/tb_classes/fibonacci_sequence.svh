@@ -19,7 +19,6 @@ class fibonacci_sequence extends uvm_sequence #(sequence_item);
 	function new(string name = "fibonacci");
 		super.new(name);
 	endfunction : new
-	
 
 	task body();
 		byte unsigned n_minus_2=0;
@@ -35,15 +34,15 @@ class fibonacci_sequence extends uvm_sequence #(sequence_item);
 		`uvm_info("FIBONACCI", " Fib(01) = 00", UVM_MEDIUM);
 		`uvm_info("FIBONACCI", " Fib(02) = 01", UVM_MEDIUM);
 		for(int ff = 3; ff<=14; ff++) begin
-		start_item(command);
-		command.A = n_minus_2;
-		command.B = n_minus_1;
-		command.op = add_op;
-		finish_item(command);
-		n_minus_2 = n_minus_1;
-		n_minus_1 = command.result;
-		`uvm_info("FIBONACCI", $sformatf("Fib(%02d) = %02d", ff, n_minus_1),
-					UVM_MEDIUM);
+			start_item(command);
+			command.A = n_minus_2;
+			command.B = n_minus_1;
+			command.op = add_op;
+			finish_item(command);
+			n_minus_2 = n_minus_1;
+			n_minus_1 = command.result;
+			`uvm_info("FIBONACCI", $sformatf("Fib(%02d) = %02d", ff, n_minus_1),
+						UVM_MEDIUM);
 		end 
 	endtask : body
 endclass : fibonacci_sequence

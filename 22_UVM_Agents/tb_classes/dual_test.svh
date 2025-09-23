@@ -22,7 +22,6 @@ class dual_test extends uvm_test;
 		super.new(name,parent);
 	endfunction : new
 
-
 	function void build_phase(uvm_phase phase);
 		
 		virtual tinyalu_bfm class_bfm, module_bfm;

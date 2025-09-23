@@ -28,8 +28,6 @@ class env extends uvm_env;
 		virtual tinyalu_bfm module_bfm;
 		env_config env_config_h;
 
-
-		
 		if(!uvm_config_db #(env_config)::get(this, "","config", env_config_h))
 			`uvm_fatal("RANDOM TEST", "Failed to get CLASS BFM");
 		
@@ -41,7 +39,6 @@ class env extends uvm_env;
 		
 		uvm_config_db #(tinyalu_agent_config)::set(this, "module_tinyalu_agent_h*", 
 													"config", module_config_h);
-
 
 
 		class_tinyalu_agent_h  = new("class_tinyalu_agent_h",this);

@@ -26,10 +26,10 @@ class sequence_item extends uvm_sequence_item;
 	shortint  unsigned       result;
 
 	constraint op_con {op dist {no_op := 1, add_op := 5, and_op:=5, 
-								xor_op:=5,mul_op:=5, rst_op:=1};}
+								xor_op:=5, 	mul_op:=5, 	 rst_op:=1};}
 
-	constraint data { A dist {8'h00:=1, [8'h01 : 8'hFE]:=1, 8'hFF:=1};
-		B dist {8'h00:=1, [8'h01 : 8'hFE]:=1, 8'hFF:=1};} 
+	constraint data { 	A dist {8'h00:=1, [8'h01 : 8'hFE]:=1, 8'hFF:=1};
+						B dist {8'h00:=1, [8'h01 : 8'hFE]:=1, 8'hFF:=1};} 
 	
 	function bit do_compare(uvm_object rhs, uvm_comparer comparer);
 		sequence_item tested;

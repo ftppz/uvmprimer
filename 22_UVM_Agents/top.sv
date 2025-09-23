@@ -21,7 +21,7 @@ module top;
 	
 	tinyalu_bfm       class_bfm();
 	
-	tinyalu class_dut (.A(class_bfm.A), .B(class_bfm.B), .op(class_bfm.op), 
+	tinyalu class_dut ( .A(class_bfm.A), .B(class_bfm.B), .op(class_bfm.op), 
 						.clk(class_bfm.clk), .reset_n(class_bfm.reset_n), 
 						.start(class_bfm.start), .done(class_bfm.done), 
 						.result(class_bfm.result));
