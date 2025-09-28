@@ -21,8 +21,6 @@ class short_random_sequence extends uvm_sequence #(sequence_item);
 	function new(string name = "short_random_sequence");
 		super.new(name);
 	endfunction : new
-	
-
 
 	task body();
 		repeat (14) begin : short_random_loop

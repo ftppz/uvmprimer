@@ -28,16 +28,16 @@ class scoreboard extends uvm_subscriber #(result_transaction);
 	endfunction : build_phase
 
 	function result_transaction predict_result(sequence_item cmd);
-	result_transaction predicted;
-		
-	predicted = new("predicted");
-		
-	case (cmd.op)
-		add_op: predicted.result = cmd.A + cmd.B;
-		and_op: predicted.result = cmd.A & cmd.B;
-		xor_op: predicted.result = cmd.A ^ cmd.B;
-		mul_op: predicted.result = cmd.A * cmd.B;
-	endcase // case (op_set)
+    	result_transaction predicted;
+    		
+    	predicted = new("predicted");
+    		
+    	case (cmd.op)
+    		add_op: predicted.result = cmd.A + cmd.B;
+    		and_op: predicted.result = cmd.A & cmd.B;
+    		xor_op: predicted.result = cmd.A ^ cmd.B;
+    		mul_op: predicted.result = cmd.A * cmd.B;
+    	endcase // case (op_set)
 
 	return predicted;
 

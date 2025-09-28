@@ -7,4 +7,4 @@ run:
 -o ./sim/uvsim +usdbfile=./sim/vista.usdb -coverdir ./sim/uvsim.cdb -v2
 
 wave:
-	uvd -d ./sim/uvsim.db -usdb ./sim/vista.usdb
+	uvd -d ./sim/uvsim.db -ucdb ./sim/uvsim.cdb -usdb ./sim/vista.usdb
