@@ -119,19 +119,19 @@ module top;
 		end
 	end
    
-   // op_cov oc;
-   // zeros_or_ones_on_ops c_00_FF;
+   op_cov oc;
+   zeros_or_ones_on_ops c_00_FF;
 
-   // initial begin : coverage
+   initial begin : coverage
    
-   //    oc = new();
-   //    c_00_FF = new();
+      oc = new();
+      c_00_FF = new();
    
-   //    forever begin @(negedge clk);
-   //       oc.sample();
-   //       c_00_FF.sample();
-   //    end
-   // end : coverage
+      forever begin @(negedge clk);
+         oc.sample();
+         c_00_FF.sample();
+      end
+   end : coverage
    
 
 	function operation_t get_op();
