@@ -6,10 +6,10 @@ vlib work
 # There can be only one!
 
 #VHDL DUT
-vcom -f dut.f
+#vcom -f dut.f
 
 # SystemVerilog DUT
-# vlog ../misc/tinyalu.sv
+vlog -f dut.f
 
 
 vlog -f tb.f
@@ -19,8 +19,8 @@ set NoQuitOnFinish 1
 onbreak {resume}
 log /* -r
 run -all
-coverage exclude -src ../../tinyalu_dut/single_cycle_add_and_xor.vhd -line 49 -code s
-coverage exclude -src ../../tinyalu_dut/single_cycle_add_and_xor.vhd -scope /top/DUT/add_and_xor -line 49 -code b
+coverage exclude -src tinyalu_dut/single_cycle_add_and_xor.sv -line 49 -code s
+coverage exclude -src tinyalu_dut/single_cycle_add_and_xor.sv -scope /top/DUT/add_and_xor -line 49 -code b
 coverage save random_test.ucdb
 
 
@@ -29,8 +29,8 @@ set NoQuitOnFinish 1
 onbreak {resume}
 log /* -r
 run -all
-coverage exclude -src ../../tinyalu_dut/single_cycle_add_and_xor.vhd -line 49 -code s
-coverage exclude -src ../../tinyalu_dut/single_cycle_add_and_xor.vhd -scope /top/DUT/add_and_xor -line 49 -code b
+coverage exclude -src tinyalu_dut/single_cycle_add_and_xor.sv -line 49 -code s
+coverage exclude -src tinyalu_dut/single_cycle_add_and_xor.sv -scope /top/DUT/add_and_xor -line 49 -code b
 coverage save add_test.ucdb
 
 vcover merge  tinyalu.ucdb random_test.ucdb add_test.ucdb
