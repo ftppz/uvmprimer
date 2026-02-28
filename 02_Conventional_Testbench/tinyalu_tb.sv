@@ -108,7 +108,10 @@ module top;
 
 	endgroup
 
-
+	initial begin
+		$fsdbDumpfile("./sim/sim.fsdb");
+		$fsdbDumpvars(0,"top");
+	end
 
 
 	initial begin
