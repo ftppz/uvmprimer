@@ -1,80 +1,77 @@
-#!/bin/sh
+VERB = UVM_LOW
+SEED = 1
+TEST ?= test
+TB = top
 
-VERB=UVM_LOW
-SEED=1
-TEST ?=test
-TB=top
+ROOT_DIR := $(CURDIR)
+SIM_DIR = $(ROOT_DIR)/sim
+TB_F = $(ROOT_DIR)/tb.f
+DUT_F = $(ROOT_DIR)/dut.f
+COVERAGE_DIR = $(SIM_DIR)/coverage
 
-COVERAGE_DIR = sim/coverage
-MERGECOV = mergecov 
-MERGED_COVERAGE_UCDB = merged_coverage.ucdb
+all: vcs_comp vcs_run
 
-all:comp run_vcs
-
-comp:clean
-	cd ./sim &&\
+vcs_comp: clean
+	mkdir -p $(SIM_DIR)
 	vcs -full64 -sverilog -fsdb -debug_access+all -lca -kdb -ntb_opts \
-	uvm -cm line+cond+fsm  -cm_dir ${COVERAGE_DIR}/${TEST}_${SEED} \
-	+nospecify  \
+	uvm -cm line+cond+fsm -cm_dir $(COVERAGE_DIR)/$(TEST)_$(SEED) \
+	+nospecify \
 	-timescale=1ns/1ns \
-	-f ../tb.f \
-	-f ../dut.f \
-	-l comp.log \
+	-f tb.f \
+	-f dut.f \
+	-o $(SIM_DIR)/simv \
+	-l $(SIM_DIR)/comp.log
 
 
 $(COVERAGE_DIR):
-	mkdir -p ${COVERAGE_DIR}
+	mkdir -p $(COVERAGE_DIR)
 
-run_vcs:$(COVERAGE_DIR) 
-	./sim/simv +UVM_TESTNAME=${TEST} \
-	+UVM_VERBOSITY=${VERB} \
-	+ntb_random_seed=${SEED} \
+vcs_run: vcs_comp $(COVERAGE_DIR)
+	$(SIM_DIR)/simv +UVM_TESTNAME=$(TEST) \
+	+UVM_VERBOSITY=$(VERB) \
+	+ntb_random_seed=$(SEED) \
 	-cm line+cond+fsm -cm_count \
-	-l ./${TEST}.log -coverage \
-	-fsdbfile ./sim/sim.fsdb
+	-l $(SIM_DIR)/$(TEST).log -coverage \
+	-fsdbfile $(SIM_DIR)/sim.fsdb
 
 
 verdi:
-	cd ./sim &&\
 	verdi \
 	-sv \
 	-uvm \
-	-f ../tb.f \
-	-f ../dut.f \
-	-top ${TB} \
+	-f tb.f \
+	-f dut.f \
+	-top $(TB) \
 	-nologo \
-	+UVM_TESTNAME = ${TEST} \
-	-ssf ./sim.fsdb 
+	+UVM_TESTNAME=$(TEST) \
+	-ssf $(SIM_DIR)/sim.fsdb
 
 cov:
-	cd ./sim &&\
-	urg -full64 -format both -report coverage -dir ${COVERAGE_DIR}/*.vdb -dbname merged.vdb &&\
+	urg -full64 -format both -report coverage -dir $(COVERAGE_DIR)/*.vdb -dbname $(SIM_DIR)/merged.vdb && \
 	verdi \
-	-f ../tb.f \
-	-f ../dut.f \
-	-top ${TB} \
-	-cov -covdir merged.vdb
+	-f tb.f \
+	-f dut.f \
+	-top $(TB) \
+	-cov -covdir $(SIM_DIR)/merged.vdb
 
 editcov:
-	cd ./sim &&\
-	urg -full64 -format both -report coverage -dir ${COVERAGE_DIR}/*.vdb -dbname merged.vdb &&\
-	dve -full64 -cov -covdir merged.vdb
+	urg -full64 -format both -report coverage -dir $(COVERAGE_DIR)/*.vdb -dbname $(SIM_DIR)/merged.vdb && \
+	dve -full64 -cov -covdir $(SIM_DIR)/merged.vdb
 
 
 
 clean:
-	cd ./sim &&\
-	rm -rf *.log *.dat *.fsdb *.key *.h ${COVERAGE_DIR} csrc ${LOG_DIR} simv.daidir sim \
-	simv DVEfiles verdiLog *.conf *.rc
+	rm -rf $(SIM_DIR) tr_db.log vcdplus.vpd vc_hdrs.h csrc simv* ucli.key \
+	verdiLog *.log *.conf *.rc *.fsdb
 
 
-run:
-	rm -rf ./sim && \
-	mkdir sim && \
-	uvs -sv -f dut.f -f tb.f -top top -ddb -usdbon -R -debug -usdb all \
--logfile ./sim/sim_shell.log -cov group \
--o ./sim/uvsim +usdbfile=./sim/vista.usdb -coverdir ./sim/uvsim.cdb -v2
+uvs:
+	rm -rf $(SIM_DIR) && \
+	mkdir -p $(SIM_DIR) && \
+	uvs -sv -f $(DUT_F) -f $(TB_F) -top $(TB) -ddb -usdbon -R -debug -usdb all \
+	-logfile $(SIM_DIR)/sim_shell.log -cov group \
+	-o $(SIM_DIR)/uvsim +usdbfile=$(SIM_DIR)/vista.usdb -coverdir $(SIM_DIR)/uvsim.cdb -v2
 
 
-wave:
-	uvd -d ./sim/uvsim.db -ucdb ./sim/uvsim.cdb -usdb ./sim/vista.usdb
+uvd:
+	uvd -d $(SIM_DIR)/uvsim.db -ucdb $(SIM_DIR)/uvsim.cdb -usdb $(SIM_DIR)/vista.usdb
